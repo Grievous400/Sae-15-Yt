@@ -1,16 +1,16 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-import pandas as pds
-import numpy as np
 
 
-df = pds.read_csv("fusion.csv")
+
+jean = pd.read_csv('fusion.csv', index_col=False)
 Liste=[]
 Liste2=[]
 
-for i in range(a):
-    Liste.append(df.iloc[i, 9])
-    Liste2.append(df.iloc[i, 10])
+for i in range(500):
+    test=jean.iloc[i, 9]
+    Liste.append(test)
+    test=jean.iloc[i, 10]
+    Liste2.append(test)
     b = len(Liste2)
 
 print(b)
