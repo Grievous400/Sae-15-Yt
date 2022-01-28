@@ -73,3 +73,36 @@ for ta in tag:
 print(f"Le nombre de valeur aberrante pour la colonne tags est : {tage}")
 pourcent= tage*100/len(tag.index)
 print("Voici le pourcentage des valeur aberrante pour la colonne tags est : ", pourcent, "%")
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+#graphique
+df = pd.read_csv('fusion.csv')
+likes = df['8']
+dislikes = df['9']
+co_lik = 0
+longueurdf=len(df)
+for index, row in df.iterrows():
+    if row['8'] > row['9']:
+        co_lik+=1
+print(co_lik)
+likes = df['8']
+dislikes = df['9']
+co_lik2 = 0
+longueurdf=len(df)
+for index, row in df.iterrows():
+    if row['8'] < row['9']:
+        co_lik2+=1
+print(co_lik2)
+
+plt.figure(figsize = (8, 8))
+x = [co_lik,co_lik2]
+plt.pie(x, labels = ['likes', 'dislikes'],
+           colors = ['red', 'green'],
+           explode = [0, 0.2],
+           autopct = lambda x: str(round(x, 2)) + '%',
+           pctdistance = 0.7, labeldistance = 1.4,
+           shadow = True)
+plt.legend()
+plt.show()
