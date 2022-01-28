@@ -1,47 +1,48 @@
 import pandas as pd
 import pandas as pds
+import numpy as np
+import csv
+
 
 #fusion
+
 for i in range(1, 6):
     lecture = pds.read_csv(f"youtube-{i}.csv", header=None)
     test = lecture.drop(lecture.columns[15], axis=1)
     test.to_csv(f"youtubebis{i}.csv")
 df = pd.concat(
- map(pd.read_csv, ['youtubebis1.csv', 'youtubebis2.csv', 'youtubebis3.csv', 'youtubebis4.csv', 'youtubebis5.csv', ]), ignore_index=True) #permet de recrée les fichiers sans la colonne description
+ map(pd.read_csv, ['youtubebis1.csv', 'youtubebis2.csv', 'youtubebis3.csv', 'youtubebis4.csv', 'youtubebis5.csv', ]), ignore_index=True)
 df.to_csv("fusion.csv", index=False)
 
-df = pd.read_csv('fusion.csv')
 
 
 
-#valeur aberrante
-video = df['0']
-titi=0
-owowo = 0
-print("LA VALEUR VIDEO_ID")
-for vid in video:
-    if vid[0]=="-":
-        owowo += 1
-print(f"Le nombre de valeur aberrante pour la colonne video_id est : {owowo}")
-pourcen= owowo*100/len(video.index)
-print("Voici le pourcentage des valeur aberrante", pourcen, "%")
+print(df.sort_values('8', ascending=False)[:5])
 
-tag = df['6']
-tage = 0
-print("LA VALEUR TAGS")
-for ta in tag:
-    if ta=="[none]":
-        tage += 1
-print(f"Le nombre de valeur aberrante pour la colonne video_id est : {tage}")
-pourcent= tage*100/len(tag.index)
-print("Voici le pourcentage des valeur aberrante", pourcent, "%")
+def ComputeMedian():
+    df_median = df['8'].median()
+    print("La moyenne de likes est de :", int(df_median))
+
+    df_median2 = df['9'].median()
+    print("La moyenne de dislikes est de :", int(df_median2))
+    return False
+print(ComputeMedian())
+
+def ComputeMean():
+    df_mean = df['8'].mean()
+    print("La moyenne de likes est de :", int(df_mean))
+
+    df_mean2 = df['9'].median()
+    print("La moyenne de dislikes est de :", int(df_mean2))
+    return False
+print(ComputeMedian())
 
 
-#moyenne
+#Moyenne
+
 
 data = pd.read_csv('fusion.csv')
 df = pd.DataFrame(data)
-
 
 c=[int(i) for i in df['7'][1:]]
 z=sum(c)/len(c)
@@ -55,7 +56,36 @@ x=int(x)
 print("La moyenne des likes est :",x)
 
 
+
 b=[int(i) for i in df['9'][1:]]
 y=sum(b)/len(b)
 y=int(y)
 print("La moyenne des dislikes est :",y)
+
+
+
+#Valeur manquante
+
+df = pd.read_csv('fusion.csv')
+
+
+video = df['0']
+titi=0
+val = 0
+print("LA VALEUR VIDEO_ID")
+for vid in video:
+    if vid[0]=="-":
+        val += 1
+print(f"Le nombre de valeur aberrante pour la colonne video_id est : {val}")
+pourcen= val*100/len(video.index)
+print("Voici le pourcentage des valeur aberrante", pourcen, "%")
+
+tag = df['6']
+tage = 0
+print("LA VALEUR TAGS")
+for ta in tag:
+    if ta=="[none]":
+        tage += 1
+print(f"Le nombre de valeur aberrante pour la colonne video_id est : {tage}")
+pourcent= tage*100/len(tag.index)
+print("Voici le pourcentage des valeur aberrante pour la colonne tags est : ", pourcent, "%")
