@@ -48,7 +48,7 @@ print("La moyenne des dislikes est :",y)
 
 
 
-#Valeur manquante
+#Valeur aberrante
 
 df = pd.read_csv('fusion.csv')
 
@@ -70,6 +70,6 @@ print("LA VALEUR TAGS")
 for ta in tag:
     if ta=="[none]":
         tage += 1
-print(f"Le nombre de valeur aberrante pour la colonne video_id est : {tage}")
+print(f"Le nombre de valeur aberrante pour la colonne tags est : {tage}")
 pourcent= tage*100/len(tag.index)
 print("Voici le pourcentage des valeur aberrante pour la colonne tags est : ", pourcent, "%")
