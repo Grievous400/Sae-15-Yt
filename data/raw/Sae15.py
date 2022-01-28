@@ -12,12 +12,12 @@ for i in range(1, 6):
     test.to_csv(f"youtubebis{i}.csv")
 df = pd.concat(
  map(pd.read_csv, ['youtubebis1.csv', 'youtubebis2.csv', 'youtubebis3.csv', 'youtubebis4.csv', 'youtubebis5.csv', ]), ignore_index=True)
-df.to_csv("fusion.csv", index=False)
+#df.to_csv("fusion.csv", index=False)
 
 
 
 
-print(df.sort_values('8', ascending=False)[:5])
+#print(df.sort_values('8', ascending=False)[:5])
 
 
 
